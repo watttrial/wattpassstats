@@ -14,21 +14,26 @@
   </script>
 </head>
 <body>
-  <h2>Download Your WattDeals Pass</h2>
-  <p>Click the button below to download:</p>
-  <button onclick="downloadPass()">Download Pass</button>
+  <p>Preparing your WattDeals Pass download...</p>
 
   <script>
-    function downloadPass() {
+    function startDownload() {
+      // Fire GA event with transport so it's sent before redirect
       gtag("event", "pkpass_download", {
-        "file_name": "wattdeals-pass.pkpass",
-        "event_category": "engagement",
-        "event_label": "WattDeals Pass"
+        file_name: "wattdeals-pass.pkpass",
+        event_category: "engagement",
+        event_label: "WattDeals Pass",
+        transport_type: "beacon" // ensures GA sends data even when navigating away
       });
 
-      // Trigger download
-      window.location.href = "https://drive.google.com/uc?export=download&id=1cmJKI2cwibzm0Q3BRH8m2RRi8XatUqQP";
+      // Redirect immediately after short delay
+      setTimeout(function() {
+        window.location.replace("https://drive.google.com/uc?export=download&id=1cmJKI2cwibzm0Q3BRH8m2RRi8XatUqQP");
+      }, 500); // 0.5s is enough for GA to send
     }
+
+    // Auto-run on page load
+    window.onload = startDownload;
   </script>
 </body>
 </html>
