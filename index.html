@@ -5,12 +5,12 @@
   <title>WattDeals Pass Download</title>
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LCF65WFRLN"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SSZNFH6REN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-LCF65WFRLN'); // Your GA4 Measurement ID
+    gtag('config', 'G-SSZNFH6REN'); // Updated GA4 Measurement ID
   </script>
 </head>
 <body>
@@ -18,19 +18,17 @@
 
   <script>
     function redirectWithGA() {
-      // Send GA event with callback
+      // Log custom "download" event
       gtag("event", "pkpass_download", {
         "file_name": "wattdeals-pass.pkpass",
-        "event_callback": function() {
-          // Redirect after GA confirms event is logged
-          window.location.href = "https://drive.google.com/uc?export=download&id=1cmJKI2cwibzm0Q3BRH8m2RRi8XatUqQP";
-        }
+        "event_category": "engagement",
+        "event_label": "WattDeals Pass"
       });
 
-      // Safety fallback: if callback doesn't fire, redirect anyway after 3s
+      // Redirect after short delay so GA event fires
       setTimeout(function() {
         window.location.href = "https://drive.google.com/uc?export=download&id=1cmJKI2cwibzm0Q3BRH8m2RRi8XatUqQP";
-      }, 3000);
+      }, 1000);
     }
 
     // Run redirect after page fully loads
